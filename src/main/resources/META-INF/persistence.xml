@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+  version="2.1">
+  <!--
+    <persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
+  -->
+  <persistence-unit name="default">
+    <provider>${javax.persistence.provider}</provider>
+
+    ${jpa.se.classes}
+
+    <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+
+    <properties>
+      <!-- Connection-Parameter -->
+      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1" />
+      <property name="javax.persistence.jdbc.user" value="test" />
+      <property name="javax.persistence.jdbc.password" value="test" />
+
+      <!-- Schemagenerierung -->
+      <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+      <property name="eclipselink.ddl-generation.output-mode" value="database" />
+      <property name="hibernate.hbm2ddl.auto" value="update" />
+
+      <!-- Logging level -->
+      <!-- EclipseLink: FINE logs SQL commands -->
+      <property name="eclipselink.logging.level" value="OFF" />
+      <property name="eclipselink.logging.connection" value="false" />
+      <property name="eclipselink.logging.parameters" value="true" />
+      <property name="eclipselink.logging.session" value="false" />
+      <property name="eclipselink.logging.thread" value="false" />
+      <property name="eclipselink.logging.timestamp" value="true" />
+      <!-- Hibernate: For SQL logging set the log categories org.hibernate.SQL und org.hibernate.type.descriptor.sql.BasicBinder to TRACE -->
+
+      <!-- Spezielle Einstellungen fuer EclipseLink -->
+      <!-- 0 als Wert für primitive IDs erlauben -->
+      <property name="eclipselink.id-validation" value="NULL" />
+
+      <!-- Spezielle Einstellungen fuer Hibernate -->
+      <!-- Use new id generator -->
+      <property name="hibernate.id.new_generator_mappings" value="true" />
+
+      <!-- Set default batch size -->
+      <!-- <property name="hibernate.default_batch_fetch_size" value="8"/> -->
+    </properties>
+  </persistence-unit>
+</persistence>
